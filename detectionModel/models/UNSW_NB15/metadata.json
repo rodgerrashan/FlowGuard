@@ -203,5 +203,5 @@
         "autoencoder": 0.6,
         "isolation_forest": 0.4
     },
-    "best_threshold": 0.18869373910015233
+    "best_threshold": 0.15532242728172493
 }
