@@ -17,21 +17,20 @@ RESET = "\033[0m"
 
 
 CSVPATH = "../data/UNSW_NB15/UNSW_NB15_testing-set.csv"
+MODEL_VERSION="M002"
 
 #  Loading artifacts
-autoencoder = tf.keras.models.load_model("../models/UNSW_NB15/autoencoder.keras")
-scaler = joblib.load("../models/UNSW_NB15/scaler.pkl")
-encoder = joblib.load("../models/UNSW_NB15/encoder.pkl")
+autoencoder = tf.keras.models.load_model(f"../models/UNSW_NB15/{MODEL_VERSION}/autoencoder.keras")
+scaler = joblib.load(f"../models/UNSW_NB15/{MODEL_VERSION}/scaler.pkl")
+encoder = joblib.load(f"../models/UNSW_NB15/{MODEL_VERSION}/encoder.pkl")
 
-with open("../models/UNSW_NB15/metadata.json") as f:
+with open(f"../models/UNSW_NB15/{MODEL_VERSION}/metadata.json") as f:
     metadata = json.load(f)
 
-numeric_cols = metadata["numeric_columns"]
+selected_numerical_cols = metadata["selected_numerical_columns"]
 categorical_cols = metadata["categorical_columns"]
 onehot_cols = metadata["onehot_columns"]
 threshold = metadata["best_threshold"]
-ensemble_weights = metadata["ensemble_weights"]
-
 
 
 # Logging
@@ -62,14 +61,14 @@ def preprocess_flow(flow_df):
     X_cat = X_cat.reindex(columns=[c for c in onehot_cols if c.startswith(tuple(categorical_cols))], fill_value=0)
 
     # 3. Numeric features
-    X_num = df[numeric_cols]
+    X_num = df[selected_numerical_cols]
 
     # 4. Combine
     X_final = pd.concat([X_num, X_cat], axis=1)
 
 
     # 5. Ensure order matches training
-    X_final = X_final.reindex(columns=numeric_cols + onehot_cols, fill_value=0)
+    X_final = X_final.reindex(columns=selected_numerical_cols + onehot_cols, fill_value=0)
 
     # 6. Scale numeric + onehot if scaler was fitted on full dataset
     X_scaled = scaler.transform(X_final)

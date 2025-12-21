@@ -1,5 +1,5 @@
 {
-    "numeric_columns": [
+    "selected_numerical_columns": [
         "ackdat",
         "ct_dst_ltm",
         "ct_dst_sport_ltm",
