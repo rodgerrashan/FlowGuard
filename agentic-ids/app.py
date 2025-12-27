@@ -31,7 +31,14 @@ def detect():
     # print("================================================\n")
 
     try:
+
+        
         result = inference_service.predict(features)
+        # print(result)
+        #
+        # Send this result to orchestrator for full pipeline processing
+
+
         print(f"[INFO] Flow ID: {flow_id} | Prediction: {result['prediction']} | Score: {result['score']:.6f}")
         # return jsonify({
         #     "flow_id": flow_id,

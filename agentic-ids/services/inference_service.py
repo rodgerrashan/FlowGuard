@@ -23,5 +23,9 @@ class InferenceService:
 
         return {
             "prediction": int(prediction[0]),
-            "score": float(recon_error[0])
+            "score": float(recon_error[0]),
+            "details": {
+                "reconstruction_error": recon_error[0],
+                "features": features
+            }
         }
