@@ -56,7 +56,7 @@ pip install -r requirements.txt
 ### 2. Run the stream   
 
 ```bash
-python realtimeDetector.py
+python infer.py
 ```
 
 

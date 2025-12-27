@@ -16,15 +16,15 @@ BLUE = "\033[94m"
 RESET = "\033[0m"
 
 
-CSVPATH = "../data/UNSW_NB15/UNSW_NB15_testing-set.csv"
+CSVPATH = "../../data/UNSW_NB15/UNSW_NB15_testing-set.csv"
 MODEL_VERSION="M002"
 
 #  Loading artifacts
-autoencoder = tf.keras.models.load_model(f"../models/UNSW_NB15/{MODEL_VERSION}/autoencoder.keras")
-scaler = joblib.load(f"../models/UNSW_NB15/{MODEL_VERSION}/scaler.pkl")
-encoder = joblib.load(f"../models/UNSW_NB15/{MODEL_VERSION}/encoder.pkl")
+autoencoder = tf.keras.models.load_model(f"../artifacts/{MODEL_VERSION}/autoencoder.keras")
+scaler = joblib.load(f"../artifacts/{MODEL_VERSION}/scaler.pkl")
+encoder = joblib.load(f"../artifacts/{MODEL_VERSION}/encoder.pkl")
 
-with open(f"../models/UNSW_NB15/{MODEL_VERSION}/metadata.json") as f:
+with open(f"../artifacts/{MODEL_VERSION}/metadata.json") as f:
     metadata = json.load(f)
 
 selected_numerical_cols = metadata["selected_numerical_columns"]
