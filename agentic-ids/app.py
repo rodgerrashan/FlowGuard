@@ -34,7 +34,7 @@ def detect():
 
         
         result = inference_service.predict(features)
-        # print(result)
+        print(result)
         #
         # Send this result to orchestrator for full pipeline processing
 
